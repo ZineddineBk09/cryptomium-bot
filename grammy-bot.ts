@@ -1,70 +1,6 @@
 import { Bot, Context, InlineKeyboard } from 'grammy'
+import axios from 'axios'
 import 'dotenv/config'
-
-
-// //Pre-assign menu text
-// const firstMenu =
-//   '<b>Menu 1</b>\n\nA beautiful menu with a shiny inline button.'
-// const secondMenu =
-//   '<b>Menu 2</b>\n\nA better menu with even more shiny inline buttons.'
-
-// //Pre-assign button text
-// const nextButton = 'Next'
-// const backButton = 'Back'
-// const tutorialButton = 'Tutorial'
-
-// //Build keyboards
-// const firstMenuMarkup = new InlineKeyboard().text(nextButton, backButton)
-
-// const secondMenuMarkup = new InlineKeyboard()
-//   .text(backButton, backButton)
-//   .text(tutorialButton, 'https://core.telegram.org/bots/tutorial')
-
-// //This handler sends a menu with the inline buttons we pre-assigned above
-// bot.command('menu', async (ctx) => {
-//   await ctx.reply(firstMenu, {
-//     parse_mode: 'HTML',
-//     reply_markup: firstMenuMarkup,
-//   })
-// })
-
-// //This handler processes back button on the menu
-// bot.callbackQuery(backButton, async (ctx) => {
-//   //Update message content with corresponding menu section
-//   await ctx.editMessageText(firstMenu, {
-//     reply_markup: firstMenuMarkup,
-//     parse_mode: 'HTML',
-//   })
-// })
-
-// //This handler processes next button on the menu
-// bot.callbackQuery(nextButton, async (ctx) => {
-//   //Update message content with corresponding menu sectios
-//   await ctx.editMessageText(secondMenu, {
-//     reply_markup: secondMenuMarkup,
-//     parse_mode: 'HTML',
-//   })
-// })
-
-// //This function would be added to the dispatcher as a handler for messages coming from the Bot API
-// bot.on('message', async (ctx) => {
-//   //Print to console
-//   console.log(
-//     `${ctx.from.first_name} wrote ${
-//       'text' in ctx.message ? ctx.message.text : ''
-//     }`
-//   )
-
-//   if (screaming && ctx.message.text) {
-//     //Scream the message
-//     await ctx.reply(ctx.message.text.toUpperCase(), {
-//       entities: ctx.message.entities,
-//     })
-//   } else {
-//     //This is equivalent to forwarding, without the sender's name
-//     await ctx.copyMessage(ctx.message.chat.id)
-//   }
-// })
 
 /**
  * ok now i want to go to the final step which is building the actual cryptomium telegram bot which will serve latest news and cryptocurrencies prices in the crypto space.
@@ -72,10 +8,120 @@ i wan't the user when he enter the bot o be greeted with a welcome button in the
 then after he clicks on the welcome button he will see 2 buttons in place of welcome button one for latest news and the other for cryptocurrency prices.
 the news will be provided by the api we built earlier, and the prices from coingecko API (e.g. :https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=chainlink)
  */
-//Create a new bot
-const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || '')
 
+// Create an instance of the `Bot` class and pass your bot token to it.
+const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || '') // <-- put your bot token between the ""
 
+// create first welcome menu
+const welcomeMenu = new InlineKeyboard()
+  .text('Latest News', 'latest_news')
+  .text('Cryptocurrency Prices', 'crypto_prices')
 
-//Start the Bot
+// choose news category menu
+const newsCategoryMenu = getCategories().then((categories) => {
+  const menu = new InlineKeyboard()
+  for (let i = 0; i < categories.length; i++) {
+    menu.text(
+      categories[i],
+      'latest_news_by_category_' + categories[i].toLocaleLowerCase()
+    )
+  }
+  return menu
+})
+
+// create second menu
+const BackToMenuMenu = new InlineKeyboard().text(
+  'Back to Main Menu',
+  'back_to_main_menu'
+)
+
+// show welcome menu
+bot.command('start', async (ctx) => {
+  await ctx.reply('Hello! I am Cryptomium Bot. How can I assist you today?', {
+    reply_markup: welcomeMenu,
+  })
+})
+
+// Handle other messages.
+bot.on('message', async (ctx) => {
+  ctx.reply('I am sorry, I do not understand.')
+  // display the welcome menu
+  await ctx.reply('Please use the buttons below.', {
+    reply_markup: welcomeMenu,
+  })
+})
+
+// actions
+bot.callbackQuery('latest_news', async (ctx) => {
+  console.log('latest_news')
+  await ctx.editMessageText('Latest News', {
+    reply_markup: await newsCategoryMenu,
+  })
+})
+
+const latestNewsByCategoryRegex = /latest_news_by_category(.*)/
+bot.callbackQuery(latestNewsByCategoryRegex, async (ctx) => {
+  // check how to get the category from the callback query
+  //ex: latest_news_by_categorynews
+  const category = ctx.callbackQuery.data.replace(
+    'latest_news_by_category_',
+    ''
+  )
+  // get the data from the response
+  const data = await getLatestNewsByCategory(category)
+  // loop through the data
+  for (let i = 0; i < data.length; i++) {
+    // add the title and the link to the string
+    await ctx.reply(data[i].pageUrl)
+  }
+
+  await ctx.reply('Back to Main Menu', {
+    reply_markup: BackToMenuMenu,
+  })
+})
+
+bot.callbackQuery('crypto_prices', async (ctx) => {
+  console.log('crypto_prices')
+  await ctx.editMessageText('Cryptocurrency Prices', {
+    reply_markup: BackToMenuMenu,
+  })
+})
+
+bot.callbackQuery('back_to_main_menu', async (ctx) => {
+  console.log('back_to_main_menu')
+  await ctx.editMessageText('Choose an Option', {
+    reply_markup: welcomeMenu,
+  })
+})
+
+// Start the bot.
 bot.start()
+
+// Functions
+async function getLatestNews() {
+  const response = await axios.get('http://localhost:3000/api/news')
+  const data = response.data
+
+  return data
+}
+
+async function getLatestNewsByCategory(category: string) {
+  const response = await axios.get(
+    'http://localhost:3000/api/news?category=' + category.toUpperCase()
+  )
+  const data = response.data
+
+  return data
+}
+
+async function getCategories() {
+  const data = await getLatestNews()
+  let categories: string[] = []
+  // get unique categories from the data
+  for (let i = 0; i < data.length; i++) {
+    if (!categories.includes(data[i].category)) {
+      categories.push(data[i].category)
+    }
+  }
+  return categories
+}
