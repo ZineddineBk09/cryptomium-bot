@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const cron = require('node-cron')
 const fs = require('fs')
 
 const COINTELEGRAPH_URL = 'https://cointelegraph.com/category/latest-news'
@@ -61,7 +62,6 @@ const scrapeCoinTelegraphLatestNews = async () => {
     const newsData = await Promise.all(
       newsPageUrls.map(async (url) => {
         try {
-          console.log('Scraping data from page:', BASE_URL + url)
           const page = await browser.newPage()
           await page.goto(BASE_URL + url)
 
@@ -111,12 +111,14 @@ const scrapeCoinTelegraphLatestNews = async () => {
   }
 }
 
-// Usage
-scrapeCoinTelegraphLatestNews()
-  .then((data) => {
-    console.log('Latest CoinTelegraph News:', data, data.length)
-    saveDataToJson(data)
-  })
-  .catch((error) => {
-    console.error('Error:', error)
-  })
+// Schedule the scraping script to run every 30 minutes
+cron.schedule('*/15 * * * *', () => {
+  console.log('Running the scraping script...')
+  scrapeCoinTelegraphLatestNews()
+    .then((data) => {
+      saveDataToJson(data)
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    })
+})
