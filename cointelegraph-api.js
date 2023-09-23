@@ -1,13 +1,21 @@
 const puppeteer = require('puppeteer')
+const fs = require('fs')
 
 const COINTELEGRAPH_URL = 'https://cointelegraph.com/category/latest-news'
 const BASE_URL = 'https://cointelegraph.com'
+
+function saveDataToJson(data) {
+  const jsonData = JSON.stringify(data, null, 2) // Convert data to JSON format with indentation
+  fs.writeFileSync('coinTelegraphData.json', jsonData) // Write data to 'coinTelegraphData.json' file
+  console.log('Data saved to coinTelegraphData.json')
+}
 
 // Function to scrape data from CoinTelegraph
 async function scrapeCoinTelegraphLatestNewsURLs() {
   try {
     const browser = await puppeteer.launch({
       headless: 'new',
+      timeout: 0,
     })
     const page = await browser.newPage()
     await page.goto(COINTELEGRAPH_URL)
@@ -15,9 +23,8 @@ async function scrapeCoinTelegraphLatestNewsURLs() {
     // Scroll down the page multiple times to load more articles
     for (let i = 0; i < 10; i++) {
       await page.evaluate(() => {
-        window.scrollTo(0, document.body.scrollHeight - 1200)
+        window.scrollTo(0, document.body.scrollHeight)
       })
-      await page.waitForTimeout(2000) // Wait for page to load
     }
 
     // Extract news page URLs
@@ -29,7 +36,6 @@ async function scrapeCoinTelegraphLatestNewsURLs() {
     })
 
     await browser.close()
-    // console.log(newsPageUrls.length, 'news page URLs found')
     return newsPageUrls
   } catch (error) {
     throw error
@@ -41,41 +47,52 @@ const scrapeCoinTelegraphLatestNews = async () => {
     const newsPageUrls = await scrapeCoinTelegraphLatestNewsURLs()
     const browser = await puppeteer.launch({
       headless: 'new',
+      timeout: 0,
     })
 
     // Extract data from news pages
     const newsData = await Promise.all(
       newsPageUrls.map(async (url) => {
-        console.log('Scraping data from page:', BASE_URL + url)
-        const page = await browser.newPage()
-        await page.goto(BASE_URL + url)
+        try {
+          console.log('Scraping data from page:', BASE_URL + url)
+          const page = await browser.newPage()
+          await page.goto(BASE_URL + url)
 
-        // Extract data from news page
-        const data = await page.evaluate(() => {
-          const title = document.querySelector('.post__title')?.innerText || ''
-          const author =
-            document.querySelector('.post-meta__author-name')?.innerText || ''
-          const lead = document.querySelector('.post__lead')?.innerText || ''
-          const date =
-            document.querySelector('.post-meta__publish-date')?.innerText || ''
-          const content = document.querySelector('.post__text')?.innerText || ''
-          const imageUrl = document
-            .querySelector('.lazy-image__img')
-            .getAttribute('src')
+          // Extract data from news page
+          const data = await page.evaluate(() => {
+            const title =
+              document.querySelector('.post__title')?.innerText || ''
+            const author =
+              document.querySelector('.post-meta__author-name')?.innerText || ''
+            const lead = document.querySelector('.post__lead')?.innerText || ''
+            const date =
+              document.querySelector('.post-meta__publish-date')?.innerText ||
+              ''
+            const imageUrl = document
+              .querySelector('.lazy-image__img')
+              .getAttribute('src')
+            const category =
+              document.querySelector('.post-cover__badge')?.innerText || ''
 
+            return {
+              title,
+              author,
+              lead,
+              date,
+              category,
+              imageUrl,
+            }
+          })
+
+          await page.close()
+
+          return { ...data, pageUrl: BASE_URL + url }
+        } catch (error) {
+          console.error('Error scraping news page:', error)
           return {
-            title,
-            author,
-            lead,
-            date,
-            content,
-            imageUrl,
+            title: '',
           }
-        })
-
-        await page.close()
-
-        return { ...data, pageUrl: BASE_URL + url }
+        }
       })
     )
 
@@ -90,7 +107,8 @@ const scrapeCoinTelegraphLatestNews = async () => {
 // Usage
 scrapeCoinTelegraphLatestNews()
   .then((data) => {
-    console.log('Latest CoinTelegraph News:', data)
+    console.log('Latest CoinTelegraph News:', data, data.length)
+    saveDataToJson(data)
   })
   .catch((error) => {
     console.error('Error:', error)
