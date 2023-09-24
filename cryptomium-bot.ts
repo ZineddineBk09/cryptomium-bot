@@ -70,7 +70,7 @@ bot.on('message', async (ctx) => {
 // actions
 bot.callbackQuery('latest_news', async (ctx) => {
   console.log('latest_news')
-  await ctx.editMessageText('Latest News on Cointelegraph', {
+  await ctx.reply('Latest News on Cointelegraph', {
     reply_markup: await newsCategoryMenu,
   })
 })
