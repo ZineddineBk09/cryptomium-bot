@@ -13,7 +13,7 @@ export const newsCategoryMenu = getCategories().then((categories) => {
   return menu.row().text('Back to Main Menu', 'back_to_main_menu')
 })
 
-export async function handleWelcome(ctx: Context) {
+export async function handleLatestNews(ctx: Context) {
   console.log('latest_news')
   await ctx.reply('Latest News on Cointelegraph', {
     reply_markup: await newsCategoryMenu,
