@@ -60,7 +60,9 @@ const scrapeRektLatestNews = async () => {
       newsPageUrls.map(async ({ url, description }) => {
         try {
           const page = await browser.newPage()
-          await page.goto(REKT_URL + url)
+          await page.goto(REKT_URL + url, {
+            timeout: 0,
+          })
 
           // Extract data from news page
           const data = await page.evaluate(() => {
@@ -71,7 +73,12 @@ const scrapeRektLatestNews = async () => {
               .querySelector('.post-content p > figure > img')
               .getAttribute('src')
             const category =
-              document.querySelector('.post-meta > p > span')?.innerText || ''
+              document
+                .querySelectorAll('.post-meta > p > span')
+                .map((span) => {
+                  return span.innerText
+                })
+                .join(' - ') || ''
 
             return {
               title,
