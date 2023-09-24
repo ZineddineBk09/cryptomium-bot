@@ -2,6 +2,7 @@ import { Bot, Context, InlineKeyboard } from 'grammy'
 import axios from 'axios'
 import 'dotenv/config'
 import { CryptoCurrency } from './interfaces'
+import { handleWelcome } from './handlers/welcome-handler'
 
 /**
  * ok now i want to go to the final step which is building the actual cryptomium telegram bot which will serve latest news and cryptocurrencies prices in the crypto space.
@@ -31,36 +32,11 @@ const newsCategoryMenu = getCategories().then((categories) => {
   return menu.row().text('Back to Main Menu', 'back_to_main_menu')
 })
 
-// create second menu
-const BackToMenuMenu = new InlineKeyboard().text(
-  'Back to Main Menu',
-  'back_to_main_menu'
-)
+// ------------------ Start ------------------
+bot.command('start', handleWelcome)
 
-// show welcome menu
-bot.command('start', async (ctx) => {
-  const introduction = `
-👋 Hello! I am Cryptomium Bot.
-
-![Cryptomium Bot](https://github.com/ZineddineBk09/cryptomium-bot/blob/main/public/cryptomium-bot.jpeg?raw=true)
-
-ℹ️ Here's a brief about my creator:
-Benkhaled Zineddine, a full-stack developer with 3+ years of experience in web development.
-
-🌐 Portfolio: [Check out my portfolio](https://zineddine-benkhaled.vercel.app)
-👨‍💻 GitHub: [Visit my GitHub profile](https://github.com/ZineddineBk09)
-
-How can I assist you today?
-  `
-
-  await ctx.reply(introduction, {
-    reply_markup: welcomeMenu,
-    parse_mode: 'Markdown',
-  })
-})
-
-// Handle other messages.
-bot.on('message', async (ctx) => {
+// ------------------ Help ------------------
+bot.on('message', async (ctx: Context) => {
   await ctx.reply('I am sorry, I do not understand.')
   // display the welcome menu
   await ctx.reply('Please select an option from below.', {
@@ -68,8 +44,8 @@ bot.on('message', async (ctx) => {
   })
 })
 
-// actions
-bot.callbackQuery('latest_news', async (ctx) => {
+// ------------------ Latest News ------------------
+bot.callbackQuery('latest_news', async (ctx: Context) => {
   console.log('latest_news')
   await ctx.reply('Latest News on Cointelegraph', {
     reply_markup: await newsCategoryMenu,
@@ -77,15 +53,34 @@ bot.callbackQuery('latest_news', async (ctx) => {
 })
 
 const latestNewsByCategoryRegex = /latest_news_by_category(.*)/
-bot.callbackQuery(latestNewsByCategoryRegex, async (ctx) => {
+bot.callbackQuery(latestNewsByCategoryRegex, async (ctx: Context) => {
   // check how to get the category from the callback query
   //ex: latest_news_by_categorynews
-  const category = ctx.callbackQuery.data.replace(
-    'latest_news_by_category_',
-    ''
-  )
+  const category =
+    ctx.callbackQuery!.data!.replace('latest_news_by_category_', '') || 'news'
   // get the data from the response
   const data = await getLatestNewsByCategory(category)
+  // loop through the data
+  for (let i = 0; i < data.length; i++) {
+    // add the title and the link to the string
+    await ctx.reply(data[i].pageUrl)
+  }
+
+  await ctx.reply('Latest News on Cointelegraph', {
+    reply_markup: await newsCategoryMenu,
+  })
+})
+
+bot.callbackQuery('security_news', async (ctx: Context) => {
+  console.log('security_news')
+  // get the data from the response
+  const data = await getLatestNews('http://localhost:3000/api/security-news')
+  if (data.length == 0) {
+    await ctx.reply(
+      'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
+    )
+    return
+  }
   // loop through the data
   for (let i = 0; i < data.length; i++) {
     // add the title and the link to the string
@@ -109,7 +104,7 @@ const paginationKeyboard = new InlineKeyboard()
   .row()
   .text('Back to Main Menu', 'back_to_main_menu')
 
-bot.callbackQuery('previous', async (ctx) => {
+bot.callbackQuery('previous', async (ctx: Context) => {
   console.log('previous:', currentPage, ' - ', currency)
   currentPage == 1 ? (currentPage = 1) : (currentPage -= 1)
   cryptoPrices = await getLatestCryptoPrices(currency)
@@ -192,7 +187,7 @@ bot.callbackQuery('previous', async (ctx) => {
   }
 })
 
-bot.callbackQuery('next', async (ctx) => {
+bot.callbackQuery('next', async (ctx: Context) => {
   console.log('next:', currentPage, ' - ', currency)
   console.log(cryptoPrices.length / pageSize)
   currentPage == cryptoPrices.length / pageSize
@@ -269,7 +264,7 @@ bot.callbackQuery('next', async (ctx) => {
   })
 })
 
-bot.callbackQuery('crypto_prices', async (ctx) => {
+bot.callbackQuery('crypto_prices', async (ctx: Context) => {
   console.log('crypto_prices')
   // display cryptoPricesVsCurrencyMenu
   await ctx.editMessageText('Choose the Base Currency', {
@@ -285,9 +280,9 @@ const cryptoPricesVsCurrencyMenu = new InlineKeyboard()
   .row()
   .text('Back to Main Menu', 'back_to_main_menu')
 const cryptoPricesVsCurrencyMenuRegex = /crypto_prices_vs_(.*)/
-bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
+bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx: Context) => {
   console.log('crypto_prices_vs_usd')
-  currency = ctx.callbackQuery.data.replace('crypto_prices_vs_', '')
+  currency = ctx.callbackQuery!.data!.replace('crypto_prices_vs_', '') || 'usd'
   cryptoPrices = await getLatestCryptoPrices(currency)
 
   // handle coingecko exceeded the rate limit error => data=[]
@@ -362,9 +357,9 @@ bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
 })
 
 const currencyRegex = /currency_(.*)/
-bot.callbackQuery(currencyRegex, async (ctx) => {
+bot.callbackQuery(currencyRegex, async (ctx: Context) => {
   // Display full info about the currency
-  const currency = ctx.callbackQuery.data.replace('currency_', '')
+  const currency = ctx.callbackQuery!.data!.replace('currency_', '') || 'usd'
   const data = await getCurrencyInfos(currency)
 
   // handle coingecko exceeded the rate limit error => data=[]
@@ -455,7 +450,7 @@ bot.callbackQuery(currencyRegex, async (ctx) => {
   })
 })
 
-bot.callbackQuery('back_to_main_menu', async (ctx) => {
+bot.callbackQuery('back_to_main_menu', async (ctx: Context) => {
   console.log('back_to_main_menu')
   await ctx.editMessageText('Choose an Option', {
     reply_markup: welcomeMenu,
@@ -495,6 +490,23 @@ async function getLatestNewsByCategory(category: string) {
 async function getCategories() {
   try {
     const data = await getLatestNews()
+    let categories: string[] = []
+    // get unique categories from the data
+    for (let i = 0; i < data.length; i++) {
+      if (!categories.includes(data[i].category)) {
+        categories.push(data[i].category)
+      }
+    }
+    return categories
+  } catch (error) {
+    console.log('getCategories Error:', error)
+    return []
+  }
+}
+
+async function getSecurityNewsCategories() {
+  try {
+    const data = await getLatestNews('http://localhost:3000/api/security-news')
     let categories: string[] = []
     // get unique categories from the data
     for (let i = 0; i < data.length; i++) {
