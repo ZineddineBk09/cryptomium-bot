@@ -6,13 +6,20 @@ const COINTELEGRAPH_URL = 'https://cointelegraph.com/category/latest-news'
 const BASE_URL = 'https://cointelegraph.com'
 
 function saveDataToJson(data) {
-  //{
-  // "news": []
-  // }
-  // update the news array with the data
-  const jsonData = JSON.stringify(data, null, 2) // Convert data to JSON format with indentation
-  fs.writeFileSync('db.json', JSON.stringify({ news: data }, null, 2)) // Write data to 'db.json' file
-  console.log('Data saved to db.json')
+  try {
+    // Read the existing JSON file
+    const existingData = JSON.parse(fs.readFileSync('db.json', 'utf-8'))
+
+    // Update the news array with the new data
+    existingData.news = data 
+
+    // Write the modified object back to the JSON file
+    fs.writeFileSync('db.json', JSON.stringify(existingData, null, 2))
+
+    console.log('Data saved to db.json')
+  } catch (error) {
+    console.error('Error saving data to db.json:', error)
+  }
 }
 
 // Function to scrape data from CoinTelegraph
@@ -60,7 +67,9 @@ const scrapeCoinTelegraphLatestNews = async () => {
       newsPageUrls.map(async (url) => {
         try {
           const page = await browser.newPage()
-          await page.goto(BASE_URL + url)
+          await page.goto(BASE_URL + url, {
+            timeout: 0,
+          })
 
           // Extract data from news page
           const data = await page.evaluate(() => {
@@ -109,7 +118,7 @@ const scrapeCoinTelegraphLatestNews = async () => {
 }
 
 // Schedule the scraping script to run every 30 minutes
-cron.schedule('*/15 * * * *', () => {
+cron.schedule('*/1 * * * *', () => {
   console.log('Running the scraping script for cointelegraph...')
   scrapeCoinTelegraphLatestNews()
     .then((data) => {

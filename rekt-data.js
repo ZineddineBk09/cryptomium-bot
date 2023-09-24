@@ -5,11 +5,20 @@ const fs = require('fs')
 const REKT_URL = 'https://rekt.news'
 
 function saveDataToJson(data) {
-  fs.writeFileSync(
-    'db.json',
-    JSON.stringify({ securityNews: data }, null, 2)
-  ) // Write data to 'db.json' file
-  console.log('Data saved to db.json')
+  try {
+    // Read the existing JSON file
+    const existingData = JSON.parse(fs.readFileSync('db.json', 'utf-8'))
+
+    // Update the securityNews array with the new data
+    existingData.securityNews = data
+
+    // Write the modified object back to the JSON file
+    fs.writeFileSync('db.json', JSON.stringify(existingData, null, 2))
+
+    console.log('Data saved to db.json')
+  } catch (error) {
+    console.error('Error saving data to db.json:', error)
+  }
 }
 
 // Function to scrape data from Rekt

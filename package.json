@@ -2,8 +2,9 @@
   "scripts": {
     "start-server": "node api.js",
     "start-bot": "ts-node cryptomium-bot.ts",
-    "fetch-data": "node cointelegraph-data.js",
-    "start": "concurrently \"npm run start-server\" \"npm run fetch-data\" \"npm run start-bot\""
+    "fetch-cointelegraph-data": "node cointelegraph-data.js",
+    "fetch-rekt-data": "node rekt-data.js",
+    "start": "concurrently \"npm run start-server\" \"npm run fetch-cointelegraph-data\" \"npm run fetch-rekt-data\" \"npm run start-bot\""
   },
   "dependencies": {
     "axios": "^1.5.0",

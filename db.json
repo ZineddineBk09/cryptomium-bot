@@ -1,3 +1,139 @@
 {
-  "securityNews": "[\n  {\n    \"title\": \"GONE PHISHING\",\n    \"date\": \"Friday, September 22, 2023\",\n    \"category\": \"Phishing - Scams\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/gone-phishing-header.png\",\n    \"pageUrl\": \"https://rekt.news/gone-phishing/\",\n    \"description\": \"Phishing is a year-round sport. But crypto is providing especially bountiful waters lately. You’d have thought those of us still around would know better by now… What lurks in the murky depths?\"\n  },\n  {\n    \"title\": \"REMITANO - REKT\",\n    \"date\": \"Friday, September 15, 2023\",\n    \"category\": \"Remitano - CEX - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/remitano-header.png\",\n    \"pageUrl\": \"https://rekt.news/remitano-rekt/\",\n    \"description\": \"Another exchange drained, is Lazarus going for a September hat-trick? Remitano's hot wallets were hit for $2.7M, yesterday. But quickly frozen USDT ensured profits were vastly reduced. Are we… learning?\"\n  },\n  {\n    \"title\": \"COINEX - REKT\",\n    \"date\": \"Wednesday, September 13, 2023\",\n    \"category\": \"CoinEx - CEX - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/coinex-header.png\",\n    \"pageUrl\": \"https://rekt.news/coinex-rekt/\",\n    \"description\": \"rekt across thirteen chains. Is that a new record? CoinEx has become the latest crypto custodian to have its hot wallets emptied, losing an eventual total of $54.3M. How long until the next CEX is hit?\"\n  },\n  {\n    \"title\": \"CAT AND MOUSE\",\n    \"date\": \"Friday, September 8, 2023\",\n    \"category\": \"Privacy - Regulation - Tornado Cash\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/cat-and-mouse-header.png\",\n    \"pageUrl\": \"https://rekt.news/cat-and-mouse/\",\n    \"description\": \"Privacy is dying, but all hope is not lost. The tug of war between crypto-enabled privacy and regulatory oversight has been on-going for years. Are Privacy Pools the answer?\"\n  },\n  {\n    \"title\": \"STAKE - REKT\",\n    \"date\": \"Monday, September 4, 2023\",\n    \"category\": \"Stake - Casino - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/stake-header.png\",\n    \"pageUrl\": \"https://rekt.news/stake-rekt/\",\n    \"description\": \"They say the house always wins. Not in crypto. On-chain casino Stake lost over $41M from its hot wallets today. But why the delay, and omissions, in official comms?\"\n  },\n  {\n    \"title\": \"BALANCER - REKT\",\n    \"date\": \"Saturday, September 2, 2023\",\n    \"category\": \"Balancer - Beethoven X - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/balancer-header.png\",\n    \"pageUrl\": \"https://rekt.news/balancer-rekt/\",\n    \"description\": \"Balancer has had a bit of a wobble. First came a warning. Then, last Sunday, the AMM (along with ‘official partner’ Beethoven X) lost $2.1M from v2 Boosted pools.\"\n  },\n  {\n    \"title\": \"EXACTLY PROTOCOL - REKT\",\n    \"date\": \"Friday, August 18, 2023\",\n    \"category\": \"Exactly Protocol - Optimism - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/exactly-header.png\",\n    \"pageUrl\": \"https://rekt.news/exactly-protocol-rekt/\",\n    \"description\": \"L2s have been going through something of a rekt-naissance lately. Exactly Protocol got hit for $7.2M by an exploit which drained users' collateral. Will Exactly ever financially recover from this?\"\n  },\n  {\n    \"title\": \"SHIBARIUM BRIDGE - REKT\",\n    \"date\": \"Thursday, August 17, 2023\",\n    \"category\": \"Shibarium - Bridge - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/shibarium-header.png\",\n    \"pageUrl\": \"https://rekt.news/shibarium-bridge-rekt/\",\n    \"description\": \"The Shibarium devs are in the doghouse. A botched launch of Shiba Inu’s ETH L2 sees a total of $2.6M of user funds stuck in a faulty bridge. Memecoins are evolving... but why?\"\n  },\n  {\n    \"title\": \"ROCKETSWAP - REKT\",\n    \"date\": \"Tuesday, August 15, 2023\",\n    \"category\": \"RocketSwap - Base - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/rocketswap-header.png\",\n    \"pageUrl\": \"https://rekt.news/rocketswap-rekt/\",\n    \"description\": \"RocketSwap has lost $869k to compromised private keys, allegedly stolen in a bruteforce attack on the project’s server. We are very sorry for your loss.\"\n  },\n  {\n    \"title\": \"ZUNAMI PROTOCOL - REKT\",\n    \"date\": \"Monday, August 14, 2023\",\n    \"category\": \"Zunami Protocol - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/zunami-header.png\",\n    \"pageUrl\": \"https://rekt.news/zunami-protocol-rekt/\",\n    \"description\": \"The Curve ecosystem can't catch a break... Yesterday, Zunami Protocol lost $2.1M to a price manipulation attack. Keeping DeFi safe is a constant game of cat-and-mouse, one that can’t always be won.\"\n  },\n  {\n    \"title\": \"STEADEFI - REKT\",\n    \"date\": \"Tuesday, August 8, 2023\",\n    \"category\": \"Steadefi - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/steadefi-header.png\",\n    \"pageUrl\": \"https://rekt.news/steadefi-rekt/\",\n    \"description\": \"Steady lads. Steadefi lost $1.14M to a compromised deployer address on Monday. The attacker drained lending contracts after transferring their ownership. Phishing or an inside job?\"\n  },\n  {\n    \"title\": \"BALD ON BASE - REKT\",\n    \"date\": \"Wednesday, August 2, 2023\",\n    \"category\": \"BALD - Base - Rugpull - REKT\",\n    \"imageUrl\": \"https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/bald-header.png\",\n    \"pageUrl\": \"https://rekt.news/bald-rekt/\",\n    \"description\": \"Coinbase’s compliant and grown-up L2 is already a shitshow. BALD pulled the rug for $23M, and the deployer has some interesting connections... YOLO-mania is in full force while DeFi burns.\"\n  }\n]"
+  "news": [
+    {
+      "title": "Miss Universe denies link with recently unveiled coin project",
+      "author": "EZRA REGUERRA",
+      "lead": "The Miss Universe Organization said that there is no Miss Universe cryptocurrency or blockchain offering involved with the Miss Universe or Miss Universe Philippines.",
+      "date": "1 HOUR AGO",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvODYyY2YwOTgtZjkxNS00YTMwLWJiMGMtZGI4N2FmMGQwYTEyLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/miss-universe-denies-link-recently-unveiled-coin-project"
+    },
+    {
+      "title": "Couple mistakenly sent $10.5M by Crypto.com to face October plea hearing",
+      "author": "EZRA REGUERRA",
+      "lead": "Thevamanogari Manivel was sentenced to 18 months of community corrections with six months of unpaid community work, while her husband will face a plea trial in October.",
+      "date": "3 HOURS AGO",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvYjZlNWVhYzItNjJhMS00ZDk2LTg3OWEtNjI4NjgyMTZjNDYyLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/couple-mistakenly-sent-10-5-m-crypto-com-october-plea-hearing"
+    },
+    {
+      "title": "Terra Classic community elects to cease USTC minting",
+      "author": "CIARAN LYONS",
+      "lead": "The community strongly backs stopping TerraUSD Classic (USTC) minting and reminting in favor of burning tokens to restore its U.S. dollar peg.",
+      "date": "6 HOURS AGO",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvNzY3M2FjMTctOGM4MC00ODBjLWFmMWMtNWU2ZmRkZGFiNjJiLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/terra-classic-cease-ustc-minting"
+    },
+    {
+      "title": "FTX’s former external legal team disputes involvement in fraud allegations",
+      "author": "CIARAN LYONS",
+      "lead": "In a recent court filing, a United States law firm that had previously offered services to FTX challenged allegations of assisting Sam Bankman-Fried in his alleged unlawful activities.",
+      "date": "8 HOURS AGO",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvNWQ1MmMxNjgtMGMwMS00YmU2LWIyNWEtNDhhYjI5MDRmZGFiLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/ftx-former-law-firm-fraud-allegations"
+    },
+    {
+      "title": "Coinbase secures AML registration from the Bank of Spain",
+      "author": "CIARAN LYONS",
+      "lead": "The Anti-Money Laundering registration will allow cryptocurrency exchange Coinbase to offer its services to retail and institutional investors in Spain.",
+      "date": "11 HOURS AGO",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvYjA0MDczZTgtNjIxYy00NGUzLTk3ZWYtOWZjNjA4NTI3N2Q1LkpQRw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/coinbase-aml-registration-bank-of-spain"
+    },
+    {
+      "title": "Coinbase holds 5% of all Bitcoin in existence: Data",
+      "author": "EZRA REGUERRA",
+      "lead": "While Coinbase holds $25 billion in BTC, the exchange only owns around $200 million of Bitcoin in its wallets.",
+      "date": "SEP 23, 2023",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvYWIyYmYwMjktYjFkNy00YjhkLWI0MDYtNzMyNTVmMmRjZTFjLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/coinbase-holds-5-percent-of-bitcoin-data"
+    },
+    {
+      "title": "Coinbase CEO warns against AI regulation, calls for decentralization",
+      "author": "EZRA REGUERRA",
+      "lead": "Coinbase CEO Brian Armstrong said decentralization and open-sourcing AI is a better alternative to regulating the space.",
+      "date": "SEP 23, 2023",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvYzhhYjk0ZjctNmVkMC00NzU2LWI5MmUtYWZkMDRlZTg0OTc4LmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/coinbase-ceo-warns-ai-regulation-calls-for-decentralization"
+    },
+    {
+      "title": "Bitcoin miners double down on efficiency and renewable energy at the World Digital Mining Summit",
+      "author": "RAY SALMOND",
+      "lead": "Bitmain rolled out its efficiency-focused Antminer S21 at the WDMS, and Bitcoin miners shared their plans for boosting productivity via green energy.",
+      "date": "SEP 23, 2023",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvNTY0NGIxMGYtYzdkNS00ZGM2LTg2NzUtN2JkYmMzYTc3YmQ2LmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/bitcoin-miners-focus-on-efficiency-renewable-energy-at-world-digital-mining-summit"
+    },
+    {
+      "title": "DeFi activity on the decline, but investment rolls in: Finance Redefined",
+      "author": "PRASHANT JHA",
+      "lead": "The total value locked in DeFi plunged by nearly $5 billion in the past week, falling to $44 billion, according to DappRadar data.",
+      "date": "SEP 23, 2023",
+      "category": "NEWSLETTER",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvMjFjZWZkZjgtYWRlYS00ZTZkLThkNzMtNDYxMWYzYWRlMjJiLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/defi-activity-on-the-decline-but-investment-rolls-in-finance-redefined"
+    },
+    {
+      "title": "Nifty News: Murakami to step back from NFTs, Dan Harmon’s NFT show debut and more",
+      "author": "BRIAN QUARMBY",
+      "lead": "Takashi Murakami said he might step back from NFTs but stay involved differently, Krapoplis is set to debut on Fox this month, and an NFT artist won a multimillion-dollar contract dispute.",
+      "date": "SEP 23, 2023",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvZWVlOTc0NzItZjAyMC00M2I4LTgzYzgtM2MyNTZmMjc1NDkyLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/nifty-news-murakami-nfts-dan-harmon-nft-show"
+    },
+    {
+      "title": "Base surges past Solana as total value locked nears $400M",
+      "author": "BRIAN QUARMBY",
+      "lead": "As per DefiLlama data, Solana’s TVL has decreased by 9.64% over the past month to sit at $358.96 million, while Base’s TVL has surged to $397.32 million.",
+      "date": "SEP 23, 2023",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvODRlZmQ0MGItNjQyZC00NjBmLWJiYWYtZjYzMzkwMzJmYjU0LmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/base-surges-past-solana-total-value-locked"
+    },
+    {
+      "title": "Crypto Biz: Bidding war for SVB Capital, new crypto funds and Citi’s private blockchain",
+      "author": "ANA PAULA PEREIRA",
+      "lead": "This week’s Crypto Biz explores SVB Capital bids, new funds from Blockchain Capital, the Hut 8-US Bitcoin merger and Citigroup’s private blockchain.",
+      "date": "SEP 22, 2023",
+      "category": "NEWSLETTER",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDkvZDhkMGJlYzUtMWU3OS00YmE3LTg4YmItNGJmYmEwMDViMTIyLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/cryptobiz-bidding-war-svb-capital-crypto-funds-citi-private-blockchain"
+    },
+    {
+      "title": "Here’s what happened in crypto today",
+      "author": "SERGE EGON OSTMAN",
+      "lead": "Need to know what happened in crypto today? Here is the latest news on daily trends and events impacting Bitcoin price, blockchain, DeFi, NFTs, Web3 and crypto regulation.",
+      "date": "SEP 22, 2023",
+      "category": "RECAP",
+      "imageUrl": "https://images.cointelegraph.com/images/1434_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjMtMDYvNzhkNzg3NjEtM2JkMi00NTY5LTk2YTctNjJhOTdmMGExYjBhLmpwZw==.jpg",
+      "pageUrl": "https://cointelegraph.com/news/what-happened-in-crypto-today"
+    },
+    {
+      "title": "Coinbase sought FTX Europe acquisition after bankruptcy: Report",
+      "author": "ANA PAULA PEREIRA",
+      "lead": "To expand its derivatives business overseas, Coinbase attempted to acquire FTX Europe twice since it filed for bankruptcy in November 2022.",
+      "date": "SEP 22, 2023",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/32_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy85NDAxOGRlMDg4ZjM5MzJkMjU0ODY4OWYzOTE1NjdjYi5qcGc=.jpg",
+      "pageUrl": "https://cointelegraph.com/news/coinbase-sought-ftx-europe-acquisition-after-bankruptcy"
+    },
+    {
+      "title": "Architect fintech receives NFA approval to operate as introducing broker",
+      "author": "DEREK ANDERSEN",
+      "lead": "The former president of FTX US founded the company in January to serve institutional investors in crypto and traditional derivatives.",
+      "date": "SEP 22, 2023",
+      "category": "NEWS",
+      "imageUrl": "https://images.cointelegraph.com/images/32_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy9hZjhjNTU0YWJhMzk5ZWQ3ZGYzY2ViZGEwYTAyMGU1NC5qcGc=.jpg",
+      "pageUrl": "https://cointelegraph.com/news/architect-fintech-receives-nfa-approval-operate-introducing-broker"
+    }
+  ]
 }

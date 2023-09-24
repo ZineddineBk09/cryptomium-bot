@@ -17,6 +17,7 @@ const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || '') // <-- put your bot to
 const welcomeMenu = new InlineKeyboard()
   .text('Latest News on Cointelegraph', 'latest_news')
   .text('Cryptocurrency Prices', 'crypto_prices')
+  .text('Security News', 'security_news')
 
 // choose news category menu
 const newsCategoryMenu = getCategories().then((categories) => {
@@ -465,9 +466,9 @@ bot.callbackQuery('back_to_main_menu', async (ctx) => {
 bot.start()
 
 // Functions
-async function getLatestNews() {
+async function getLatestNews(url: string = 'http://localhost:3000/api/news') {
   try {
-    const response = await axios.get('http://localhost:3000/api/news')
+    const response = await axios.get(url)
     const data = response.data
 
     return data
