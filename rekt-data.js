@@ -72,12 +72,13 @@ const scrapeRektLatestNews = async () => {
             const imageUrl = document
               .querySelector('.post-content p > figure > img')
               .getAttribute('src')
-            const category =
-              Array.from(
-                document
-                  .querySelectorAll('.post-meta > p > span')
-                  .map((span) => span.innerText)
-              ).join(' - ') || ''
+            const category = Array.from(
+              document
+                .querySelector('.post-meta')
+                .querySelectorAll('p > span > a')
+            )
+              .map((span) => span.innerText)
+              .join(' - ')
 
             return {
               title,
@@ -111,13 +112,13 @@ scrapeRektLatestNews().then((data) => {
   console.log(data, data.length)
 })
 // Schedule the scraping script to run every 30 minutes
-// cron.schedule('*/120 * * * *', () => {
-//   console.log('Running the scraping script for rekt...')
-//   scrapeRektLatestNews()
-//     .then((data) => {
-//       saveDataToJson(data)
-//     })
-//     .catch((error) => {
-//       console.error('Error:', error)
-//     })
-// })
+cron.schedule('*/120 * * * *', () => {
+  console.log('Running the scraping script for rekt...')
+  scrapeRektLatestNews()
+    .then((data) => {
+      saveDataToJson(data)
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    })
+})
