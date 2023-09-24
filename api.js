@@ -23,4 +23,4 @@ const http = require('http')
 setInterval(() => {
   console.log('Pinging server...')
   http.get('http://localhost:3000')
-}, 30000) // every 5 minutes (300000)
+}, 300000) // every 5 minutes (300000)
