@@ -28,7 +28,7 @@ Cryptomium Bot is a Telegram bot that provides the latest cryptocurrency news an
 - Pagination 📄: Navigate through multiple pages of cryptocurrency price data.
 - More Features Coming Soon! 🚀
 
-## Getting Started (steps emoji)  
+## Getting Started ⌨️
 
 ### Prerequisites 📋
 
@@ -56,7 +56,7 @@ Before you can run Cryptomium Bot, make sure you have the following software and
 
     `TELEGRAM_BOT_TOKEN=your-bot-token-here`
 
-## Usage (computer emoji)  
+## Usage 👨‍💻
 
 To run Cryptomium Bot, use the following command:
 
@@ -110,6 +110,6 @@ Contributions to this project are welcome! If you have ideas for improvements or
 
 This project is licensed under the [ISC License](https://opensource.org/licenses/ISC).
 
-## Acknowledgments 🎁
+## Acknowledgments 🏅
 
 - Special thanks to [Zineddine Benkhaled](mailto:@ZineddineBk09) for creating this bot.
