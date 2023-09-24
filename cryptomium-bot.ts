@@ -347,7 +347,7 @@ bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
 })
 
 const currencyRegex = /currency_(.*)/
-bot.callbackQuery(currencyRegex, async (ctx: any) => {
+bot.callbackQuery(currencyRegex, async (ctx) => {
   // Display full info about the currency
   const currency = ctx.callbackQuery.data.replace('currency_', '')
   const data = await getCurrencyInfos(currency)
