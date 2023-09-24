@@ -1,6 +1,8 @@
-import axios from "axios"
+import axios from 'axios'
 
-export async function getLatestNews(url: string = 'http://localhost:3000/api/news') {
+export async function getLatestNews(
+  url: string = 'https://cryptomium-bot.onrender.com/api/news'
+) {
   try {
     const response = await axios.get(url)
     const data = response.data
@@ -15,7 +17,8 @@ export async function getLatestNews(url: string = 'http://localhost:3000/api/new
 export async function getLatestNewsByCategory(category: string) {
   try {
     const response = await axios.get(
-      'http://localhost:3000/api/news?category=' + category.toUpperCase()
+      'https://cryptomium-bot.onrender.com/api/news?category=' +
+        category.toUpperCase()
     )
     const data = response.data
 
@@ -45,7 +48,9 @@ export async function getCategories() {
 
 export async function getSecurityNewsCategories() {
   try {
-    const data = await getLatestNews('http://localhost:3000/api/security-news')
+    const data = await getLatestNews(
+      'https://cryptomium-bot.onrender.com/api/security-news'
+    )
     let categories: string[] = []
     // get unique categories from the data
     for (let i = 0; i < data.length; i++) {
@@ -88,4 +93,3 @@ export async function getCurrencyInfos(currency: string) {
     return []
   }
 }
-

@@ -22,5 +22,5 @@ server.listen(PORT, () => {
 const http = require('http')
 setInterval(() => {
   console.log('Pinging server...')
-  http.get('http://localhost:3000')
+  http.get('https://cryptomium-bot.onrender.com')
 }, 300000) // every 5 minutes (300000)
