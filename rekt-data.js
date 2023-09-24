@@ -6,7 +6,10 @@ const REKT_URL = 'https://rekt.news'
 
 function saveDataToJson(data) {
   const jsonData = JSON.stringify(data, null, 2) // Convert data to JSON format with indentation
-  fs.writeFileSync('db.json', JSON.stringify({ securityNews: jsonData }, null, 2)) // Write data to 'db.json' file
+  fs.writeFileSync(
+    'db.json',
+    JSON.stringify({ securityNews: jsonData }, null, 2)
+  ) // Write data to 'db.json' file
   console.log('Data saved to db.json')
 }
 
@@ -108,11 +111,8 @@ const scrapeRektLatestNews = async () => {
   }
 }
 
-scrapeRektLatestNews().then((data) => {
-  console.log(data, data.length)
-})
 // Schedule the scraping script to run every 30 minutes
-cron.schedule('*/120 * * * *', () => {
+cron.schedule('*/1 * * * *', () => {
   console.log('Running the scraping script for rekt...')
   scrapeRektLatestNews()
     .then((data) => {
