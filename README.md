@@ -112,4 +112,4 @@ This project is licensed under the [ISC License](https://opensource.org/licenses
 
 ## Acknowledgments 🏅
 
-- Special thanks to [Zineddine Benkhaled](mailto:@ZineddineBk09) for creating this bot.
+- Special thanks to [Zineddine Benkhaled](@ZineddineBk09) for creating this bot.
