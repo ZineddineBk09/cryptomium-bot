@@ -94,10 +94,6 @@ bot.callbackQuery(latestNewsByCategoryRegex, async (ctx) => {
   await ctx.reply('Latest News on Cointelegraph', {
     reply_markup: await newsCategoryMenu,
   })
-  // show the back to menu button
-  await ctx.reply('Menu', {
-    reply_markup: BackToMenuMenu,
-  })
 })
 
 let cryptoPrices: CryptoCurrency[] = [] as CryptoCurrency[]
