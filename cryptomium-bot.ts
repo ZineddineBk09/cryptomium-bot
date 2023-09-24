@@ -15,7 +15,7 @@ const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || '') // <-- put your bot to
 
 // create first welcome menu
 const welcomeMenu = new InlineKeyboard()
-  .text('Latest News', 'latest_news')
+  .text('Latest News on Cointelegraph', 'latest_news')
   .text('Cryptocurrency Prices', 'crypto_prices')
 
 // choose news category menu
@@ -38,8 +38,23 @@ const BackToMenuMenu = new InlineKeyboard().text(
 
 // show welcome menu
 bot.command('start', async (ctx) => {
-  await ctx.reply('Hello! I am Cryptomium Bot. How can I assist you today?', {
+  const introduction = `
+👋 Hello! I am Cryptomium Bot.
+
+![Cryptomium Bot](https://github.com/ZineddineBk09/cryptomium-bot/blob/main/public/cryptomium-bot.jpeg?raw=true)
+
+ℹ️ Here's a brief about my creator:
+Benkhaled Zineddine, a full-stack developer with 3+ years of experience in web development.
+
+🌐 Portfolio: [Check out my portfolio](https://zineddine-benkhaled.vercel.app)
+👨‍💻 GitHub: [Visit my GitHub profile](https://github.com/ZineddineBk09)
+
+How can I assist you today?
+  `
+
+  await ctx.reply(introduction, {
     reply_markup: welcomeMenu,
+    parse_mode: 'Markdown',
   })
 })
 
@@ -55,7 +70,7 @@ bot.on('message', async (ctx) => {
 // actions
 bot.callbackQuery('latest_news', async (ctx) => {
   console.log('latest_news')
-  await ctx.editMessageText('Latest News', {
+  await ctx.editMessageText('Latest News on Cointelegraph', {
     reply_markup: await newsCategoryMenu,
   })
 })
@@ -76,7 +91,7 @@ bot.callbackQuery(latestNewsByCategoryRegex, async (ctx) => {
     await ctx.reply(data[i].pageUrl)
   }
 
-  await ctx.reply('Latest News', {
+  await ctx.reply('Latest News on Cointelegraph', {
     reply_markup: await newsCategoryMenu,
   })
   // show the back to menu button
@@ -116,6 +131,7 @@ bot.callbackQuery('previous', async (ctx) => {
 
       if (counter === 0) {
         clearInterval(interval)
+        counter = 60
       }
     }, 1000)
     return
@@ -196,9 +212,10 @@ bot.callbackQuery('next', async (ctx) => {
     // display a counter to the user
     const interval = setInterval(async () => {
       counter--
-      await ctx.reply('Please try again in ' + counter + ' seconds.')
+      await ctx.editMessageText('Please try again in ' + counter + ' seconds.')
       if (counter == 0) {
         clearInterval(interval)
+        counter = 60
       }
     }, 1000)
     return
@@ -285,9 +302,10 @@ bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
     // display a counter to the user
     const interval = setInterval(() => {
       counter--
-      ctx.reply('Please try again in ' + counter + ' seconds.')
+      ctx.editMessageText('Please try again in ' + counter + ' seconds.')
       if (counter == 0) {
         clearInterval(interval)
+        counter = 60
       }
     }, 1000)
 
@@ -366,6 +384,7 @@ bot.callbackQuery(currencyRegex, async (ctx) => {
 
       if (counter === 0) {
         clearInterval(interval)
+        counter = 60
       }
     }, 1000)
     return
