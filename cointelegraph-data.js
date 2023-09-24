@@ -11,11 +11,8 @@ function saveDataToJson(data) {
   // }
   // update the news array with the data
   const jsonData = JSON.stringify(data, null, 2) // Convert data to JSON format with indentation
-  fs.writeFileSync(
-    'coinTelegraphData.json',
-    JSON.stringify({ news: data }, null, 2)
-  ) // Write data to 'coinTelegraphData.json' file
-  console.log('Data saved to coinTelegraphData.json')
+  fs.writeFileSync('db.json', JSON.stringify({ news: data }, null, 2)) // Write data to 'db.json' file
+  console.log('Data saved to db.json')
 }
 
 // Function to scrape data from CoinTelegraph
