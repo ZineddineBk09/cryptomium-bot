@@ -5,7 +5,7 @@
   "main": "cryptomium-bot.ts",
   "scripts": {
     "start-server": "node api.js",
-    "start-bot": "ts-node cryptomium-bot.ts",
+    "start-bot": "npx ts-node cryptomium-bot.ts",
     "fetch-cointelegraph-data": "node cointelegraph-data.js",
     "fetch-rekt-data": "node rekt-data.js",
     "start": "npx concurrently \"npm run start-server\" \"npm run fetch-cointelegraph-data\" \"npm run fetch-rekt-data\" \"npm run start-bot\""
@@ -27,7 +27,8 @@
     "ngrok": "^5.0.0-beta.2",
     "node-cron": "^3.0.2",
     "puppeteer": "^21.3.4",
-    "telebot": "^1.4.1"
+    "telebot": "^1.4.1",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/node": "^20.6.3",
