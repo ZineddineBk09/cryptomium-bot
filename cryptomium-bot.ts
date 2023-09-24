@@ -88,6 +88,7 @@ bot.callbackQuery(latestNewsByCategoryRegex, async (ctx) => {
 let cryptoPrices: CryptoCurrency[] = [] as CryptoCurrency[]
 let currentPage = 1
 let currency = 'usd'
+let counter = 60
 const pageSize = 10
 
 const paginationKeyboard = new InlineKeyboard()
@@ -98,9 +99,29 @@ const paginationKeyboard = new InlineKeyboard()
 
 bot.callbackQuery('previous', async (ctx) => {
   console.log('previous:', currentPage, ' - ', currency)
-  currentPage == 1 ? (currentPage = 1) : currentPage--
+  currentPage == 1 ? (currentPage = 1) : (currentPage -= 1)
   cryptoPrices = await getLatestCryptoPrices(currency)
-  cryptoPrices = cryptoPrices.slice(
+
+  // handle coingecko exceeded the rate limit error => data=[]
+  if (cryptoPrices.length == 0) {
+    const message = await ctx.reply(
+      'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
+    )
+    counter = 60
+    // display a counter to the user
+    const interval = setInterval(async () => {
+      counter--
+      //replace the message with the new counter
+      await ctx.editMessageText('Please try again in ' + counter + ' seconds.')
+
+      if (counter === 0) {
+        clearInterval(interval)
+      }
+    }, 1000)
+    return
+  }
+
+  const prices = cryptoPrices.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   )
@@ -116,14 +137,14 @@ bot.callbackQuery('previous', async (ctx) => {
       ? '₿'
       : 'ETH'
   // loop through the data
-  for (let i = 0; i < cryptoPrices.length; i++) {
+  for (let i = 0; i < prices.length; i++) {
     const {
       name,
       current_price,
       market_cap_rank,
       price_change_percentage_24h,
       symbol,
-    } = cryptoPrices[i]
+    } = prices[i]
     const price_change_percentage_24h_string =
       price_change_percentage_24h > 0
         ? `${market_cap_rank} - ${name} (${symbol.toUpperCase()}) ${displayCurrency}${current_price} (24H: +${price_change_percentage_24h}%)`
@@ -138,29 +159,52 @@ bot.callbackQuery('previous', async (ctx) => {
       .row()
   }
 
-  currencies.row().text('Back to Main Menu', 'back_to_main_menu')
-
-  await ctx.editMessageText('Choose a Currency', {
-    reply_markup: currencies,
-    parse_mode: 'HTML',
-  })
+  currencies
+    .row()
+    .text('Back to Main Menu', 'back_to_main_menu')
+    .row()
+    .text('Previous', 'previous')
+    .text('Next', 'next')
 
   if (currentPage == 1) {
-    await ctx.reply('More Prices', {
-      reply_markup: paginationKeyboard,
+    await ctx.reply('Choose a Currency', {
+      reply_markup: currencies,
+      parse_mode: 'HTML',
     })
   } else {
-    await ctx.editMessageText('More Prices', {
-      reply_markup: paginationKeyboard,
+    await ctx.editMessageText('Choose a Currency', {
+      reply_markup: currencies,
+      parse_mode: 'HTML',
     })
   }
 })
 
 bot.callbackQuery('next', async (ctx) => {
   console.log('next:', currentPage, ' - ', currency)
-  currentPage == currentPage++
+  console.log(cryptoPrices.length / pageSize)
+  currentPage == cryptoPrices.length / pageSize
+    ? (currentPage = 1)
+    : (currentPage += 1)
   cryptoPrices = await getLatestCryptoPrices(currency)
-  cryptoPrices = cryptoPrices.slice(
+
+  // handle coingecko exceeded the rate limit error => data=[]
+  if (cryptoPrices.length == 0) {
+    await ctx.reply(
+      'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
+    )
+    counter = 60
+    // display a counter to the user
+    const interval = setInterval(async () => {
+      counter--
+      await ctx.reply('Please try again in ' + counter + ' seconds.')
+      if (counter == 0) {
+        clearInterval(interval)
+      }
+    }, 1000)
+    return
+  }
+
+  const prices = cryptoPrices.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   )
@@ -176,14 +220,14 @@ bot.callbackQuery('next', async (ctx) => {
       ? '₿'
       : 'ETH'
   // loop through the data
-  for (let i = 0; i < cryptoPrices.length; i++) {
+  for (let i = 0; i < prices.length; i++) {
     const {
       name,
       current_price,
       market_cap_rank,
       price_change_percentage_24h,
       symbol,
-    } = cryptoPrices[i]
+    } = prices[i]
     const price_change_percentage_24h_string =
       price_change_percentage_24h > 0
         ? `${market_cap_rank} - ${name} (${symbol.toUpperCase()}) ${displayCurrency}${current_price} (24H: +${price_change_percentage_24h}%)`
@@ -198,15 +242,16 @@ bot.callbackQuery('next', async (ctx) => {
       .row()
   }
 
-  currencies.row().text('Back to Main Menu', 'back_to_main_menu')
+  currencies
+    .row()
+    .text('Back to Main Menu', 'back_to_main_menu')
+    .row()
+    .text('Previous', 'previous')
+    .text('Next', 'next')
 
   await ctx.editMessageText('Choose a Currency', {
     reply_markup: currencies,
     parse_mode: 'HTML',
-  })
-
-  await ctx.reply('More Prices', {
-    reply_markup: paginationKeyboard,
   })
 })
 
@@ -230,7 +275,26 @@ bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
   console.log('crypto_prices_vs_usd')
   currency = ctx.callbackQuery.data.replace('crypto_prices_vs_', '')
   cryptoPrices = await getLatestCryptoPrices(currency)
-  cryptoPrices = cryptoPrices.slice(
+
+  // handle coingecko exceeded the rate limit error => data=[]
+  if (cryptoPrices.length == 0) {
+    await ctx.reply(
+      'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
+    )
+    counter = 60
+    // display a counter to the user
+    const interval = setInterval(() => {
+      counter--
+      ctx.reply('Please try again in ' + counter + ' seconds.')
+      if (counter == 0) {
+        clearInterval(interval)
+      }
+    }, 1000)
+
+    return
+  }
+
+  const prices = cryptoPrices.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   )
@@ -247,14 +311,14 @@ bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
       ? '₿'
       : 'ETH'
   // loop through the data
-  for (let i = 0; i < cryptoPrices.length; i++) {
+  for (let i = 0; i < prices.length; i++) {
     const {
       name,
       current_price,
       market_cap_rank,
       price_change_percentage_24h,
       symbol,
-    } = cryptoPrices[i]
+    } = prices[i]
     const price_change_percentage_24h_string =
       price_change_percentage_24h > 0
         ? `${market_cap_rank} - ${name} (${symbol.toUpperCase()}) ${displayCurrency}${current_price} (24H: +${price_change_percentage_24h}%)`
@@ -269,23 +333,44 @@ bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
       .row()
   }
 
-  currencies.row().text('Back to Main Menu', 'back_to_main_menu')
+  currencies
+    .row()
+    .text('Back to Main Menu', 'back_to_main_menu')
+    .row()
+    .text('Previous', 'previous')
+    .text('Next', 'next')
 
   await ctx.editMessageText('Choose a Currency', {
     reply_markup: currencies,
     parse_mode: 'HTML',
   })
-
-  await ctx.reply('More Prices', {
-    reply_markup: paginationKeyboard,
-  })
 })
 
 const currencyRegex = /currency_(.*)/
-bot.callbackQuery(currencyRegex, async (ctx) => {
+bot.callbackQuery(currencyRegex, async (ctx: any) => {
   // Display full info about the currency
   const currency = ctx.callbackQuery.data.replace('currency_', '')
   const data = await getCurrencyInfos(currency)
+
+  // handle coingecko exceeded the rate limit error => data=[]
+  if (data.length == 0) {
+    const message = await ctx.reply(
+      'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
+    )
+    counter = 60
+    // display a counter to the user
+    const interval = setInterval(async () => {
+      counter--
+      //replace the message with the new counter
+      await ctx.editMessageText('Please try again in ' + counter + ' seconds.')
+
+      if (counter === 0) {
+        clearInterval(interval)
+      }
+    }, 1000)
+    return
+  }
+
   const {
     name,
     current_price,
@@ -366,48 +451,73 @@ bot.start()
 
 // Functions
 async function getLatestNews() {
-  const response = await axios.get('http://localhost:3000/api/news')
-  const data = response.data
+  try {
+    const response = await axios.get('http://localhost:3000/api/news')
+    const data = response.data
 
-  return data
+    return data
+  } catch (error) {
+    console.log('getLatestNews Error:', error)
+    return []
+  }
 }
 
 async function getLatestNewsByCategory(category: string) {
-  const response = await axios.get(
-    'http://localhost:3000/api/news?category=' + category.toUpperCase()
-  )
-  const data = response.data
+  try {
+    const response = await axios.get(
+      'http://localhost:3000/api/news?category=' + category.toUpperCase()
+    )
+    const data = response.data
 
-  return data
+    return data
+  } catch (error) {
+    console.log('getLatestNewsByCategory Error:', error)
+    return []
+  }
 }
 
 async function getCategories() {
-  const data = await getLatestNews()
-  let categories: string[] = []
-  // get unique categories from the data
-  for (let i = 0; i < data.length; i++) {
-    if (!categories.includes(data[i].category)) {
-      categories.push(data[i].category)
+  try {
+    const data = await getLatestNews()
+    let categories: string[] = []
+    // get unique categories from the data
+    for (let i = 0; i < data.length; i++) {
+      if (!categories.includes(data[i].category)) {
+        categories.push(data[i].category)
+      }
     }
+    return categories
+  } catch (error) {
+    console.log('getCategories Error:', error)
+    return []
   }
-  return categories
 }
 
 async function getLatestCryptoPrices(currency: string = 'usd') {
-  const URL =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=' + currency
-  const response = await axios.get(URL)
-  const data = response.data
+  try {
+    const URL =
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=' + currency
+    const response = await axios.get(URL)
+    const data = response.data
 
-  return data
+    return data
+  } catch (error) {
+    console.log('getLatestCryptoPrices Error:', error)
+    return []
+  }
 }
 
 async function getCurrencyInfos(currency: string) {
-  const URL =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' +
-    currency
-  const response = await axios.get(URL)
-  const data = response.data
+  try {
+    const URL =
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' +
+      currency
+    const response = await axios.get(URL)
+    const data = response.data
 
-  return data
+    return data
+  } catch (error) {
+    console.log('getCurrencyInfos Error:', error)
+    return []
+  }
 }
