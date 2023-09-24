@@ -104,10 +104,10 @@ bot.callbackQuery('previous', async (ctx) => {
 
   // handle coingecko exceeded the rate limit error => data=[]
   if (cryptoPrices.length == 0) {
-    const message = await ctx.reply(
-      'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
+    await ctx.reply(
+      'Coingecko API Exceeded the Rate Limit. Please try again later in 1 minute.'
     )
-    counter = 60
+    counter != 60 && counter != 0 ? null : (counter = 60)
     // display a counter to the user
     const interval = setInterval(async () => {
       counter--
@@ -192,7 +192,7 @@ bot.callbackQuery('next', async (ctx) => {
     await ctx.reply(
       'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
     )
-    counter = 60
+    counter != 60 && counter != 0 ? null : (counter = 60)
     // display a counter to the user
     const interval = setInterval(async () => {
       counter--
@@ -281,7 +281,7 @@ bot.callbackQuery(cryptoPricesVsCurrencyMenuRegex, async (ctx) => {
     await ctx.reply(
       'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
     )
-    counter = 60
+    counter != 60 && counter != 0 ? null : (counter = 60)
     // display a counter to the user
     const interval = setInterval(() => {
       counter--
@@ -354,10 +354,10 @@ bot.callbackQuery(currencyRegex, async (ctx) => {
 
   // handle coingecko exceeded the rate limit error => data=[]
   if (data.length == 0) {
-    const message = await ctx.reply(
+    await ctx.reply(
       'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
     )
-    counter = 60
+    counter != 60 && counter != 0 ? null : (counter = 60)
     // display a counter to the user
     const interval = setInterval(async () => {
       counter--
