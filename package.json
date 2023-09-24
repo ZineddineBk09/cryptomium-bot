@@ -1,11 +1,20 @@
 {
+  "name": "cryptomium-bot",
+  "version": "1.0.0",
+  "description": "A bot that sends you the latest crypto news and market data",
+  "main": "cryptomium-bot.ts",
   "scripts": {
+    "start": "concurrently \"npm run start-server\" \"npm run fetch-cointelegraph-data\" \"npm run fetch-rekt-data\" \"npm run start-bot\"",
     "start-server": "node api.js",
     "start-bot": "ts-node cryptomium-bot.ts",
     "fetch-cointelegraph-data": "node cointelegraph-data.js",
-    "fetch-rekt-data": "node rekt-data.js",
-    "start": "concurrently \"npm run start-server\" \"npm run fetch-cointelegraph-data\" \"npm run fetch-rekt-data\" \"npm run start-bot\""
+    "fetch-rekt-data": "node rekt-data.js"
   },
+  "author": {
+    "name": "Zineddine Benkhaled",
+    "email": "benkhaledzineddine@gmail.com"
+  },
+  "license": "ISC",
   "dependencies": {
     "axios": "^1.5.0",
     "body-parser": "^1.20.2",
