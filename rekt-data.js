@@ -10,7 +10,7 @@ function saveDataToJson(data) {
     const existingData = JSON.parse(fs.readFileSync('db.json', 'utf-8'))
 
     // Update the securityNews array with the new data
-    existingData.securityNews = data
+    existingData['security-news'] = data
 
     // Write the modified object back to the JSON file
     fs.writeFileSync('db.json', JSON.stringify(existingData, null, 2))
@@ -120,7 +120,7 @@ const scrapeRektLatestNews = async () => {
 }
 
 // Schedule the scraping script to run every 30 minutes
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('*/120 * * * *', () => {
   console.log('Running the scraping script for rekt...')
   scrapeRektLatestNews()
     .then((data) => {

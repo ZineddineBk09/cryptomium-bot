@@ -118,7 +118,7 @@ const scrapeCoinTelegraphLatestNews = async () => {
 }
 
 // Schedule the scraping script to run every 30 minutes
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('*/30 * * * *', () => {
   console.log('Running the scraping script for cointelegraph...')
   scrapeCoinTelegraphLatestNews()
     .then((data) => {

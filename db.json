@@ -135,5 +135,103 @@
       "imageUrl": "https://images.cointelegraph.com/images/32_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS9zdG9yYWdlL3VwbG9hZHMvdmlldy9hZjhjNTU0YWJhMzk5ZWQ3ZGYzY2ViZGEwYTAyMGU1NC5qcGc=.jpg",
       "pageUrl": "https://cointelegraph.com/news/architect-fintech-receives-nfa-approval-operate-introducing-broker"
     }
+  ],
+  "security-news": [
+    {
+      "title": "GONE PHISHING",
+      "date": "Friday, September 22, 2023",
+      "category": "Phishing - Scams",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/gone-phishing-header.png",
+      "pageUrl": "https://rekt.news/gone-phishing/",
+      "description": "Phishing is a year-round sport. But crypto is providing especially bountiful waters lately. You’d have thought those of us still around would know better by now… What lurks in the murky depths?"
+    },
+    {
+      "title": "REMITANO - REKT",
+      "date": "Friday, September 15, 2023",
+      "category": "Remitano - CEX - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/remitano-header.png",
+      "pageUrl": "https://rekt.news/remitano-rekt/",
+      "description": "Another exchange drained, is Lazarus going for a September hat-trick? Remitano's hot wallets were hit for $2.7M, yesterday. But quickly frozen USDT ensured profits were vastly reduced. Are we… learning?"
+    },
+    {
+      "title": "COINEX - REKT",
+      "date": "Wednesday, September 13, 2023",
+      "category": "CoinEx - CEX - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/coinex-header.png",
+      "pageUrl": "https://rekt.news/coinex-rekt/",
+      "description": "rekt across thirteen chains. Is that a new record? CoinEx has become the latest crypto custodian to have its hot wallets emptied, losing an eventual total of $54.3M. How long until the next CEX is hit?"
+    },
+    {
+      "title": "CAT AND MOUSE",
+      "date": "Friday, September 8, 2023",
+      "category": "Privacy - Regulation - Tornado Cash",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/cat-and-mouse-header.png",
+      "pageUrl": "https://rekt.news/cat-and-mouse/",
+      "description": "Privacy is dying, but all hope is not lost. The tug of war between crypto-enabled privacy and regulatory oversight has been on-going for years. Are Privacy Pools the answer?"
+    },
+    {
+      "title": "STAKE - REKT",
+      "date": "Monday, September 4, 2023",
+      "category": "Stake - Casino - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/stake-header.png",
+      "pageUrl": "https://rekt.news/stake-rekt/",
+      "description": "They say the house always wins. Not in crypto. On-chain casino Stake lost over $41M from its hot wallets today. But why the delay, and omissions, in official comms?"
+    },
+    {
+      "title": "BALANCER - REKT",
+      "date": "Saturday, September 2, 2023",
+      "category": "Balancer - Beethoven X - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/balancer-header.png",
+      "pageUrl": "https://rekt.news/balancer-rekt/",
+      "description": "Balancer has had a bit of a wobble. First came a warning. Then, last Sunday, the AMM (along with ‘official partner’ Beethoven X) lost $2.1M from v2 Boosted pools."
+    },
+    {
+      "title": "EXACTLY PROTOCOL - REKT",
+      "date": "Friday, August 18, 2023",
+      "category": "Exactly Protocol - Optimism - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/exactly-header.png",
+      "pageUrl": "https://rekt.news/exactly-protocol-rekt/",
+      "description": "L2s have been going through something of a rekt-naissance lately. Exactly Protocol got hit for $7.2M by an exploit which drained users' collateral. Will Exactly ever financially recover from this?"
+    },
+    {
+      "title": "SHIBARIUM BRIDGE - REKT",
+      "date": "Thursday, August 17, 2023",
+      "category": "Shibarium - Bridge - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/shibarium-header.png",
+      "pageUrl": "https://rekt.news/shibarium-bridge-rekt/",
+      "description": "The Shibarium devs are in the doghouse. A botched launch of Shiba Inu’s ETH L2 sees a total of $2.6M of user funds stuck in a faulty bridge. Memecoins are evolving... but why?"
+    },
+    {
+      "title": "ROCKETSWAP - REKT",
+      "date": "Tuesday, August 15, 2023",
+      "category": "RocketSwap - Base - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/rocketswap-header.png",
+      "pageUrl": "https://rekt.news/rocketswap-rekt/",
+      "description": "RocketSwap has lost $869k to compromised private keys, allegedly stolen in a bruteforce attack on the project’s server. We are very sorry for your loss."
+    },
+    {
+      "title": "ZUNAMI PROTOCOL - REKT",
+      "date": "Monday, August 14, 2023",
+      "category": "Zunami Protocol - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/zunami-header.png",
+      "pageUrl": "https://rekt.news/zunami-protocol-rekt/",
+      "description": "The Curve ecosystem can't catch a break... Yesterday, Zunami Protocol lost $2.1M to a price manipulation attack. Keeping DeFi safe is a constant game of cat-and-mouse, one that can’t always be won."
+    },
+    {
+      "title": "STEADEFI - REKT",
+      "date": "Tuesday, August 8, 2023",
+      "category": "Steadefi - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/steadefi-header.png",
+      "pageUrl": "https://rekt.news/steadefi-rekt/",
+      "description": "Steady lads. Steadefi lost $1.14M to a compromised deployer address on Monday. The attacker drained lending contracts after transferring their ownership. Phishing or an inside job?"
+    },
+    {
+      "title": "BALD ON BASE - REKT",
+      "date": "Wednesday, August 2, 2023",
+      "category": "BALD - Base - Rugpull - REKT",
+      "imageUrl": "https://raw.githubusercontent.com/RektHQ/Assets/main/images/2023/01/bald-header.png",
+      "pageUrl": "https://rekt.news/bald-rekt/",
+      "description": "Coinbase’s compliant and grown-up L2 is already a shitshow. BALD pulled the rug for $23M, and the deployer has some interesting connections... YOLO-mania is in full force while DeFi burns."
+    }
   ]
 }
