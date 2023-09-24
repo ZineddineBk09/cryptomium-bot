@@ -4,7 +4,7 @@ const router = jsonServer.router('./db.json')
 const middlewares = jsonServer.defaults()
 const cors = require('cors')
 
-// Use default middlewares (CORS, static, etc.)
+// Use default middlewares
 server.use(middlewares)
 server.use(cors())
 
