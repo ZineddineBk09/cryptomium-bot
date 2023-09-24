@@ -5,10 +5,9 @@ const fs = require('fs')
 const REKT_URL = 'https://rekt.news'
 
 function saveDataToJson(data) {
-  const jsonData = JSON.stringify(data, null, 2) // Convert data to JSON format with indentation
   fs.writeFileSync(
     'db.json',
-    JSON.stringify({ securityNews: jsonData }, null, 2)
+    JSON.stringify({ securityNews: data }, null, 2)
   ) // Write data to 'db.json' file
   console.log('Data saved to db.json')
 }
