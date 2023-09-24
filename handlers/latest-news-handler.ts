@@ -1,5 +1,4 @@
-import { Bot, Context, InlineKeyboard } from 'grammy'
-import axios from 'axios'
+import { Context, InlineKeyboard } from 'grammy'
 import 'dotenv/config'
 import { getCategories } from '../utils'
 
