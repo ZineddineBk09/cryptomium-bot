@@ -16,3 +16,10 @@ const PORT = 3000
 server.listen(PORT, () => {
   console.log(`JSON Server is running on port ${PORT}`)
 })
+
+// to prevent the server from sleeping every 15 minutes when deployed on render.com
+// we will ping the server every 5 minutes
+const http = require('http')
+setInterval(() => {
+  http.get('http://localhost:3000')
+}, 300000) // every 5 minutes (300000)

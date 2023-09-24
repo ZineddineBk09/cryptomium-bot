@@ -63,7 +63,8 @@ export async function handleCurrency(ctx: Context) {
     atl,
     atl_change_percentage,
     atl_date,
-  } = data[0]
+  } = data[0] as CryptoCurrency
+  
   const price_change_percentage_24h_string =
     price_change_percentage_24h > 0
       ? `<b>24H Change: <code>+${price_change_percentage_24h.toFixed(
