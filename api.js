@@ -21,5 +21,6 @@ server.listen(PORT, () => {
 // we will ping the server every 5 minutes
 const http = require('http')
 setInterval(() => {
+  console.log('Pinging server...')
   http.get('http://localhost:3000')
-}, 300000) // every 5 minutes (300000)
+}, 30000) // every 5 minutes (300000)
