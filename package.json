@@ -8,7 +8,7 @@
     "start-bot": "ts-node cryptomium-bot.ts",
     "fetch-cointelegraph-data": "node cointelegraph-data.js",
     "fetch-rekt-data": "node rekt-data.js",
-    "start": "concurrently \"npm run start-server\" \"npm run fetch-cointelegraph-data\" \"npm run fetch-rekt-data\" \"npm run start-bot\""
+    "start": "npx concurrently \"npm run start-server\" \"npm run fetch-cointelegraph-data\" \"npm run fetch-rekt-data\" \"npm run start-bot\""
   },
   "author": {
     "name": "Zineddine Benkhaled",
