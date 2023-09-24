@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start-server": "node index.js",
+    "start-server": "node cointelegraph-api.js",
     "start-bot": "ts-node cryptomium-bot.ts",
     "fetch-data": "node cointelegraph-data.js",
     "start": "concurrently \"npm run start-server\" \"npm run fetch-data\" \"npm run start-bot\""
