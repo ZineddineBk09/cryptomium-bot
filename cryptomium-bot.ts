@@ -1,36 +1,12 @@
 import { Bot, Context, InlineKeyboard } from 'grammy'
-import axios from 'axios'
 import 'dotenv/config'
 import { CryptoCurrency } from './interfaces'
-import { handleWelcome } from './handlers/welcome-handler'
-
-/**
- * ok now i want to go to the final step which is building the actual cryptomium telegram bot which will serve latest news and cryptocurrencies prices in the crypto space.
-i wan't the user when he enter the bot o be greeted with a welcome button in the bottom input field, after he clicks that button he receives a text which will introduce the bot to him and a greeting message (i will leave to you to write it).
-then after he clicks on the welcome button he will see 2 buttons in place of welcome button one for latest news and the other for cryptocurrency prices.
-the news will be provided by the api we built earlier, and the prices from coingecko API (e.g. :https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=chainlink)
- */
+import { handleWelcome, welcomeMenu } from './handlers/welcome-handler'
+import { handleLatestNews } from './handlers/latest-news-handler'
+import { handleLatestNewsByCategory } from './handlers/latest-news-category-handler'
 
 // Create an instance of the `Bot` class and pass your bot token to it.
 const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || '') // <-- put your bot token between the ""
-
-// create first welcome menu
-const welcomeMenu = new InlineKeyboard()
-  .text('Latest News on Cointelegraph', 'latest_news')
-  .text('Cryptocurrency Prices', 'crypto_prices')
-  .text('Security News', 'security_news')
-
-// choose news category menu
-const newsCategoryMenu = getCategories().then((categories) => {
-  const menu = new InlineKeyboard()
-  for (let i = 0; i < categories.length; i++) {
-    menu.text(
-      categories[i],
-      'latest_news_by_category_' + categories[i].toLocaleLowerCase()
-    )
-  }
-  return menu.row().text('Back to Main Menu', 'back_to_main_menu')
-})
 
 // ------------------ Start ------------------
 bot.command('start', handleWelcome)
@@ -45,32 +21,13 @@ bot.on('message', async (ctx: Context) => {
 })
 
 // ------------------ Latest News ------------------
-bot.callbackQuery('latest_news', async (ctx: Context) => {
-  console.log('latest_news')
-  await ctx.reply('Latest News on Cointelegraph', {
-    reply_markup: await newsCategoryMenu,
-  })
-})
+bot.callbackQuery('latest_news', handleLatestNews)
 
+// ------------------ Latest News by Category ------------------
 const latestNewsByCategoryRegex = /latest_news_by_category(.*)/
-bot.callbackQuery(latestNewsByCategoryRegex, async (ctx: Context) => {
-  // check how to get the category from the callback query
-  //ex: latest_news_by_categorynews
-  const category =
-    ctx.callbackQuery!.data!.replace('latest_news_by_category_', '') || 'news'
-  // get the data from the response
-  const data = await getLatestNewsByCategory(category)
-  // loop through the data
-  for (let i = 0; i < data.length; i++) {
-    // add the title and the link to the string
-    await ctx.reply(data[i].pageUrl)
-  }
+bot.callbackQuery(latestNewsByCategoryRegex, handleLatestNewsByCategory)
 
-  await ctx.reply('Latest News on Cointelegraph', {
-    reply_markup: await newsCategoryMenu,
-  })
-})
-
+// ------------------ Security News ------------------
 bot.callbackQuery('security_news', async (ctx: Context) => {
   console.log('security_news')
   // get the data from the response
@@ -459,93 +416,3 @@ bot.callbackQuery('back_to_main_menu', async (ctx: Context) => {
 
 // Start the bot
 bot.start()
-
-// Functions
-async function getLatestNews(url: string = 'http://localhost:3000/api/news') {
-  try {
-    const response = await axios.get(url)
-    const data = response.data
-
-    return data
-  } catch (error) {
-    console.log('getLatestNews Error:', error)
-    return []
-  }
-}
-
-async function getLatestNewsByCategory(category: string) {
-  try {
-    const response = await axios.get(
-      'http://localhost:3000/api/news?category=' + category.toUpperCase()
-    )
-    const data = response.data
-
-    return data
-  } catch (error) {
-    console.log('getLatestNewsByCategory Error:', error)
-    return []
-  }
-}
-
-async function getCategories() {
-  try {
-    const data = await getLatestNews()
-    let categories: string[] = []
-    // get unique categories from the data
-    for (let i = 0; i < data.length; i++) {
-      if (!categories.includes(data[i].category)) {
-        categories.push(data[i].category)
-      }
-    }
-    return categories
-  } catch (error) {
-    console.log('getCategories Error:', error)
-    return []
-  }
-}
-
-async function getSecurityNewsCategories() {
-  try {
-    const data = await getLatestNews('http://localhost:3000/api/security-news')
-    let categories: string[] = []
-    // get unique categories from the data
-    for (let i = 0; i < data.length; i++) {
-      if (!categories.includes(data[i].category)) {
-        categories.push(data[i].category)
-      }
-    }
-    return categories
-  } catch (error) {
-    console.log('getCategories Error:', error)
-    return []
-  }
-}
-
-async function getLatestCryptoPrices(currency: string = 'usd') {
-  try {
-    const URL =
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=' + currency
-    const response = await axios.get(URL)
-    const data = response.data
-
-    return data
-  } catch (error) {
-    console.log('getLatestCryptoPrices Error:', error)
-    return []
-  }
-}
-
-async function getCurrencyInfos(currency: string) {
-  try {
-    const URL =
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' +
-      currency
-    const response = await axios.get(URL)
-    const data = response.data
-
-    return data
-  } catch (error) {
-    console.log('getCurrencyInfos Error:', error)
-    return []
-  }
-}
