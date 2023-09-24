@@ -1,6 +1,6 @@
 # Cryptomium Bot
 
-![Cryptomium Bot Logo](https://chat.openai.com/c/path-to-your-image/cryptomium-bot-logo.png)
+![Cryptomium Bot Logo](./public/cryptomium-bot.jpeg)
 
 Cryptomium Bot is a Telegram bot that provides the latest cryptocurrency news and market data to users. This bot is designed to keep crypto enthusiasts informed about the rapidly changing world of cryptocurrencies. It offers features such as news categorization, cryptocurrency price tracking, and more.
 
