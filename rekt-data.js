@@ -73,12 +73,11 @@ const scrapeRektLatestNews = async () => {
               .querySelector('.post-content p > figure > img')
               .getAttribute('src')
             const category =
-              document
-                .querySelectorAll('.post-meta > p > span')
-                .map((span) => {
-                  return span.innerText
-                })
-                .join(' - ') || ''
+              Array.from(
+                document
+                  .querySelectorAll('.post-meta > p > span')
+                  .map((span) => span.innerText)
+              ).join(' - ') || ''
 
             return {
               title,
