@@ -32,7 +32,7 @@ Cryptomium Bot is a Telegram bot that provides the latest cryptocurrency news an
 
 ## Getting Started ⌨️
 
-### Prerequisites 📋
+### Prerequisites 🧾
 
 Before you can run Cryptomium Bot, make sure you have the following software and resources installed:
 
