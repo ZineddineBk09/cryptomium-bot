@@ -90,7 +90,7 @@ export async function handleCurrency(ctx: Context) {
   const formattedMessage = `
     <b>Currency:</b> ${name} (${symbol.toUpperCase()}) 
     <b>Rank:</b> #${market_cap_rank} 
-    <b>Price:</b> ${displayCurrency}${current_price.toFixed(2)}
+    <b>Price:</b> $${current_price.toFixed(2)}
     ${price_change_percentage_24h_string}
     ${ath_change_percentage_string}
     ${atl_change_percentage_string}
