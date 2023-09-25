@@ -5,7 +5,6 @@ import { CryptoCurrency } from '../interfaces'
 
 let cryptoPrices: CryptoCurrency[] = [] as CryptoCurrency[]
 let currentPage = 1
-let currency = 'usd'
 let counter = 60
 const pageSize = 10
 
