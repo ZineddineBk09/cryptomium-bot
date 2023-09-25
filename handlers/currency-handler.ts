@@ -5,7 +5,6 @@ import { CryptoCurrency } from '../interfaces'
 
 let counter = 60
 
-
 export const paginationKeyboard = new InlineKeyboard()
   .text('Previous', 'previous')
   .text('Next', 'next')
@@ -13,12 +12,11 @@ export const paginationKeyboard = new InlineKeyboard()
   .text('Back to Main Menu', 'back_to_main_menu')
 
 export async function handleCurrency(ctx: Context) {
+  console.log('currency:', ctx.callbackQuery!.data || 'currency_')
   // Display full info about the currency
   const currency =
     ctx.callbackQuery!.data!.replace('currency_', '') || 'bitcoin'
-  console.log('currency: ', currency)
   const data = await getCurrencyInfos(currency)
-  console.log('getCurrencyInfos data: ', data)
 
   // handle coingecko exceeded the rate limit error => data=[]
   if (!data) {
@@ -54,7 +52,7 @@ export async function handleCurrency(ctx: Context) {
     atl_change_percentage,
     atl_date,
   } = data as CryptoCurrency
-  
+
   const price_change_percentage_24h_string =
     price_change_percentage_24h > 0
       ? `<b>24H Change: <code>+${price_change_percentage_24h.toFixed(
@@ -80,7 +78,6 @@ export async function handleCurrency(ctx: Context) {
           2
         )}%</code></b>`
 
-  console.log(currency, ' - ', currency.toUpperCase())
   const displayCurrency =
     currency.toUpperCase() === 'USD'
       ? '$'
