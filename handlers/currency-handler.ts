@@ -3,7 +3,6 @@ import 'dotenv/config'
 import { getCurrencyInfos } from '../utils'
 import { CryptoCurrency } from '../interfaces'
 
-let currentPage = 1
 let counter = 60
 
 export const cryptoPricesVsCurrencyMenu = new InlineKeyboard()
