@@ -13,7 +13,7 @@ import {
 import { handleCryptoVsBaseCurrency } from './handlers/crypto-prices-vs-base-currency-handler'
 
 // Create an instance of the `Bot` class and pass your bot token to it.
-const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || '') // <-- put your bot token between the ""
+const bot = new Bot(process.env.TELEGRAM_BOT_TOKEN || '') // <-- put your bot token here
 
 // ------------------ Start ------------------
 bot.command('start', handleWelcome)
