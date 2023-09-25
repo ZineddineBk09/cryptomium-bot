@@ -1,8 +1,9 @@
 import axios from 'axios'
+import 'dotenv/config'
 
-export async function getLatestNews(
-  url: string = 'https://cryptomium-bot.onrender.com/api/news'
-) {
+const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3000'
+
+export async function getLatestNews(url: string = SERVER_URL + '/api/news') {
   try {
     const response = await axios.get(url)
     const data = response.data
@@ -17,8 +18,7 @@ export async function getLatestNews(
 export async function getLatestNewsByCategory(category: string) {
   try {
     const response = await axios.get(
-      'https://cryptomium-bot.onrender.com/api/news?category=' +
-        category.toUpperCase()
+      SERVER_URL + '/api/news?category=' + category.toUpperCase()
     )
     const data = response.data
 
@@ -48,9 +48,7 @@ export async function getCategories() {
 
 export async function getSecurityNewsCategories() {
   try {
-    const data = await getLatestNews(
-      'https://cryptomium-bot.onrender.com/api/security-news'
-    )
+    const data = await getLatestNews(SERVER_URL + '/api/security-news')
     let categories: string[] = []
     // get unique categories from the data
     for (let i = 0; i < data.length; i++) {
