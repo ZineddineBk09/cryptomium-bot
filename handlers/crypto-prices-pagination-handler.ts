@@ -13,6 +13,7 @@ export async function handlePrevious(ctx: Context) {
   console.log('previous:', currentPage, ' - ', currency)
   currentPage == 1 ? (currentPage = 1) : (currentPage -= 1)
   cryptoPrices = await getLatestCryptoPrices(currency)
+  console.log('cryptoPrices:', cryptoPrices)
 
   // handle coingecko exceeded the rate limit error => data=[]
   if (cryptoPrices.length == 0) {
@@ -139,6 +140,7 @@ export async function handleNext(ctx: Context) {
       market_cap_rank,
       price_change_percentage_24h,
       symbol,
+      id,
     } = prices[i]
     const price_change_percentage_24h_string =
       price_change_percentage_24h > 0
@@ -147,20 +149,16 @@ export async function handleNext(ctx: Context) {
 
     // add the title and the link to the string
     currencies
-      .text(
-        price_change_percentage_24h_string,
-        'currency_' + name.toLowerCase()
-      )
+      .text(price_change_percentage_24h_string, 'currency_' + id.toLowerCase())
       .row()
   }
 
-currencies
-  .row()
-  .text('Previous', 'previous')
-  .text('Next', 'next')
-  .row()
-  .text('Back to Main Menu', 'back_to_main_menu')
-
+  currencies
+    .row()
+    .text('Previous', 'previous')
+    .text('Next', 'next')
+    .row()
+    .text('Back to Main Menu', 'back_to_main_menu')
 
   await ctx.editMessageText('Choose a Currency', {
     reply_markup: currencies,
