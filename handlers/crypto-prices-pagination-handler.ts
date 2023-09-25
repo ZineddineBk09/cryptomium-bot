@@ -10,10 +10,9 @@ let counter = 60
 const pageSize = 10
 
 export async function handlePrevious(ctx: Context) {
-  console.log('previous:', currentPage, ' - ', currency)
+  console.log('previous')
   currentPage == 1 ? (currentPage = 1) : (currentPage -= 1)
   cryptoPrices = await getLatestCryptoPrices(currency)
-  console.log('cryptoPrices:', cryptoPrices)
 
   // handle coingecko exceeded the rate limit error => data=[]
   if (cryptoPrices.length == 0) {
@@ -92,8 +91,7 @@ export async function handlePrevious(ctx: Context) {
 }
 
 export async function handleNext(ctx: Context) {
-  console.log('next:', currentPage, ' - ', currency)
-  console.log(cryptoPrices.length / pageSize)
+  console.log('next:')
   currentPage == cryptoPrices.length / pageSize
     ? (currentPage = 1)
     : (currentPage += 1)
