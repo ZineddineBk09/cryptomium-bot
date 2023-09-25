@@ -5,7 +5,6 @@ import { CryptoCurrency } from '../interfaces'
 
 let currentPage = 1
 let counter = 60
-const pageSize = 10
 
 export const cryptoPricesVsCurrencyMenu = new InlineKeyboard()
   .text('USD', 'crypto_prices_vs_usd')
