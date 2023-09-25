@@ -18,7 +18,7 @@ export async function handleCurrency(ctx: Context) {
     ctx.callbackQuery!.data!.replace('currency_', '') || 'bitcoin'
   console.log('currency: ', currency)
   const data = await getCurrencyInfos(currency)
-  console.log('data: ', data)
+  console.log('getCurrencyInfos data: ', data)
 
   // handle coingecko exceeded the rate limit error => data=[]
   if (!data) {
@@ -53,7 +53,7 @@ export async function handleCurrency(ctx: Context) {
     atl,
     atl_change_percentage,
     atl_date,
-  } = data[0] as CryptoCurrency
+  } = data as CryptoCurrency
   
   const price_change_percentage_24h_string =
     price_change_percentage_24h > 0
