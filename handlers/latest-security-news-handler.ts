@@ -17,7 +17,8 @@ export const newsCategoryMenu = getCategories().then((categories) => {
 export async function handleLatestSecurityNews(ctx: Context) {
   console.log('security_news')
   // get the data from the response
-  const data = await getLatestNews('https://cryptomium-bot.onrender.com/api/security-news')
+  const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3000'
+  const data = await getLatestNews(SERVER_URL + '/api/security-news')
   if (data.length == 0) {
     await ctx.reply(
       'Coingecko Exceeded the Rate Limit. Please try again later in 1 minute.'
