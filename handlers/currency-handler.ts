@@ -5,13 +5,7 @@ import { CryptoCurrency } from '../interfaces'
 
 let counter = 60
 
-export const cryptoPricesVsCurrencyMenu = new InlineKeyboard()
-  .text('USD', 'crypto_prices_vs_usd')
-  .text('EUR', 'crypto_prices_vs_eur')
-  .text('BTC', 'crypto_prices_vs_btc')
-  .text('ETH', 'crypto_prices_vs_eth')
-  .row()
-  .text('Back to Main Menu', 'back_to_main_menu')
+
 export const paginationKeyboard = new InlineKeyboard()
   .text('Previous', 'previous')
   .text('Next', 'next')
