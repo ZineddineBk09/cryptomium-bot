@@ -93,5 +93,3 @@ export async function getCurrencyInfos(currency: string) {
     return {}
   }
 }
-// test getCurrencyInfos
-getCurrencyInfos('lido stacked eth').then((data) => console.log(data))
