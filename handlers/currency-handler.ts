@@ -3,7 +3,6 @@ import 'dotenv/config'
 import { getCurrencyInfos } from '../utils'
 import { CryptoCurrency } from '../interfaces'
 
-let cryptoPrices: CryptoCurrency[] = [] as CryptoCurrency[]
 let currentPage = 1
 let counter = 60
 const pageSize = 10
