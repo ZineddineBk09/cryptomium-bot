@@ -87,9 +87,11 @@ export async function getCurrencyInfos(currency: string) {
     const response = await axios.get(URL)
     const data = response.data
 
-    return data
+    return data[0]
   } catch (error) {
     console.log('getCurrencyInfos Error:', error)
-    return []
+    return {}
   }
 }
+// test getCurrencyInfos
+getCurrencyInfos('lido stacked eth').then((data) => console.log(data))
