@@ -48,7 +48,6 @@ export async function handleCurrency(ctx: Context) {
     ath,
     ath_change_percentage,
     ath_date,
-    atl,
     atl_change_percentage,
   } = data as CryptoCurrency
 
