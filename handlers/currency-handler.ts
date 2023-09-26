@@ -50,7 +50,6 @@ export async function handleCurrency(ctx: Context) {
     ath_date,
     atl,
     atl_change_percentage,
-    atl_date,
   } = data as CryptoCurrency
 
   const price_change_percentage_24h_string =
